@@ -44,8 +44,10 @@ public class Game
     {
         Room outside, theater, pub, lab, office;
       
+        Item fish = new Item(10, "fish"); // Most important item
+
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
+        outside = new Room("outside the main entrance of the university", fish);
         theater = new Room("in a lecture theater");
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");

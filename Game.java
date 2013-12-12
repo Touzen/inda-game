@@ -120,6 +120,10 @@ public class Game
                 goRoom(command);
                 break;
 
+            case DROP:
+                dropItem(command);
+                break;
+
             case PICKUP:
                 pickupItem(command);
                 break;
@@ -200,6 +204,7 @@ public class Game
             return;
         }
 
+        boolean success = false;
         Iterator<Item> it = items.iterator();
         Item item;
         while (it.hasNext()) {
@@ -209,6 +214,36 @@ public class Game
                 it.remove();
                 break;
             }
+        }
+
+        if (!success) {
+            System.out.println("Couldn't pick up the " + command.getSecondWord() + ".");
+        }
+    }
+
+    private void dropItem(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Drop what?");
+            return;
+        }
+
+        boolean success = false;
+        Inventory inventory = player.getInventory();
+        Iterator<Item> it = inventory.getItems().iterator();
+        Item item;
+        while (it.hasNext()) {
+            item = it.next();
+            if (item.getName == command.getSecondWord()) {
+                player.dropItem(item);
+                it.remove();
+                success = true;
+                break;
+            }
+        }
+
+        if (!success) {
+            System.out.println("Silly you... You can't drop the " + command.getSecondWord()
+                               + " if you don't have it!");
         }
     }
 

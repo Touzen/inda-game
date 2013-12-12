@@ -89,4 +89,8 @@ public class Player {
     public Room getRoom() {
         return currentRoom;
     }
+    
+    public Inventory getInventory() {
+        return inventory;
+    }
 }

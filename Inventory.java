@@ -34,5 +34,9 @@ public class Inventory {
     public void setSize(int newSize) {
         size = newSize;
     }
+    
+    public ArrayList<Item> getItems() {
+        return items;
+    }
 
 }

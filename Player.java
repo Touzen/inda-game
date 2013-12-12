@@ -75,7 +75,7 @@ public class Player {
     public String listItems() {
         String string = "Inventory:";
         for (Item item: inventory.getItems()) {
-            string += " " + item.getName()
+            string += " " + item.getName();
         }
         string += ".";
 

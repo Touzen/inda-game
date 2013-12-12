@@ -2,14 +2,14 @@
  * Representations for all the valid command words for the game
  * along with a string in a particular language.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2011.08.10
+ * @author  Michael Kölling, David J. Barnes and Thomas Vakili
+ * @version 2013.12.12
  */
 public enum CommandWord
 {
     // A value for each command word along with its
     // corresponding user interface string.
-    GO("go"), QUIT("quit"), HELP("help"), UNKNOWN("?");
+    GO("go"), QUIT("quit"), HELP("help"), PICKUP("pickup"), DROP("drop"), UNKNOWN("?");
     
     // The command string.
     private String commandString;

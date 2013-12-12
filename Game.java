@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  *  This class is the main class of the "World of Zuul" application. 
@@ -205,7 +206,7 @@ public class Game
         }
 
         boolean success = false;
-        Iterator<Item> it = items.iterator();
+        Iterator<Item> it = player.getRoom().getItems().iterator();
         Item item;
         while (it.hasNext()) {
             item = it.next();
@@ -233,7 +234,7 @@ public class Game
         Item item;
         while (it.hasNext()) {
             item = it.next();
-            if (item.getName == command.getSecondWord()) {
+            if (item.getName() == command.getSecondWord()) {
                 player.dropItem(item);
                 it.remove();
                 success = true;

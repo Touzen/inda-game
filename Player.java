@@ -2,7 +2,7 @@
  * A class to represent the player.
  *
  * @author Thomas Vakili
- * @version 2013.12.10
+ * @version 2013.12.12
 */
 public class Player {
     private String name;
@@ -26,8 +26,7 @@ public class Player {
     */
     public boolean pickUp(Item item) {
         if (inventory.getWeight() + item.getWeight() <= maxWeight) {
-            inventory.add(item);
-            return true;
+            return inventory.add(item);
         } else {
             return false:
         }

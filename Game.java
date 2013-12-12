@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -133,6 +134,10 @@ public class Game
                 player.listItems();
                 break;
 
+            case SEARCH:
+                listRoomItems();
+                break;
+
             case QUIT:
                 wantToQuit = quit(command);
                 break;
@@ -250,6 +255,25 @@ public class Game
             System.out.println("Silly you... You can't drop the " + command.getSecondWord()
                                + " if you don't have it!");
         }
+    }
+
+    /**
+     * List the items in the room.
+    */
+    private void listRoomItems() {
+        ArrayList<Item> items = player.getRoom().getItems();
+
+        if (items.size() <= 0) {
+            System.out.println("There are no items in this rooms.");
+        }
+ 
+        String string = "The following items where found:";
+        for (Item item : items) {
+            string += " " + item.getName();
+        }
+        string += ".";
+
+        System.out.println(string);
     }
 
     public static void main(String[] args) {

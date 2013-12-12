@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * A class to represent the player.
@@ -62,10 +63,21 @@ public class Player {
     /**
      * Look around.
      *
-     * @return a String describing where you are and what exits are available.
+     * @return a String describing where you are, what exits are available
+     *         and that let's any NPCs state their mind.
     */
     public String look() {
-        return currentRoom.getLongDescription();
+        String string = "";
+        string += currentRoom.getLongDescription();
+
+        ArrayList<NPC> npcs = currentRoom.getNPCs();
+        if (npcs.size() > 0) {
+            for (NPC npc : npcs) {
+                string += "\n" + npc.getName() + " says: " + npc.getPhrase();
+            }
+        }
+
+        return string;
     }
 
     /**

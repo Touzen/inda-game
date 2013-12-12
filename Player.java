@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * A class to represent the player.
  *
@@ -44,6 +46,15 @@ public class Player {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Look around.
+     *
+     * @return a String describing where you are and what exits are available.
+    */
+    public String look() {
+        return currentRoom.getLongDescription();
     }
 
     public String getName() {

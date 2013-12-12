@@ -106,5 +106,14 @@ public class Room
     public void addItem(Item item) {
         this.items.add(item);
     }
+
+    /**
+     * Remove an item from the room.
+     *
+     * @param item to remove from the room.
+    */
+    public void removeItem(Item item) {
+        items.remove(items.indexOf(item));
+    }
 }
 

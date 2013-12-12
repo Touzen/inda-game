@@ -49,6 +49,16 @@ public class Player {
     }
 
     /**
+     * Drop an item in the current room.
+     *
+     * @param item item to drop.
+    */
+    public void dropItem(Item item) {
+        inventory.removeItem(item);
+        currentRoom.addItem(item);
+    }
+
+    /**
      * Look around.
      *
      * @return a String describing where you are and what exits are available.

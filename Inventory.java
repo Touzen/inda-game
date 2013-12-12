@@ -26,6 +26,15 @@ public class Inventory {
     }
 
     /**
+     * Remove an item from the inventory.
+     *
+     * @param item the item to remove
+    */
+    public void removeItem(Item item) {
+        items.remove(items.indexOf(item));
+    }
+
+    /**
      * Gets the number of items in the inventory
      *
      * @return The number of items

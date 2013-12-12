@@ -9,16 +9,16 @@ public class Player {
     private Room currentRoom;
     private maxWeight;
     
+    public Player(Room room) {
+        currentRoom = room;
+    }
+
     /**
      * Moves the player to a new room.
      *
      * @param direction what direction to move in
      * @return whether or not the move succeeded
     */
-    public Player(Room room) {
-        currentRoom = room;
-    }
-
     public boolean move(Direction direction) {
         Room newRoom = currentRoom.getExit(direction);
 

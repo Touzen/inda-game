@@ -7,10 +7,12 @@
 public class Player {
     private String name;
     private Room currentRoom;
-    private maxWeight;
+    private int maxWeight;
+    private Inventory inventory;
     
     public Player(Room room) {
         currentRoom = room;
+        inventory = new Inventory();
     }
 
     /**
@@ -38,9 +40,9 @@ public class Player {
     */
     public boolean pickUp(Item item) {
         if (inventory.getWeight() + item.getWeight() <= maxWeight) {
-            return inventory.add(item);
+            return inventory.addItem(item);
         } else {
-            return false:
+            return false;
         }
     }
 

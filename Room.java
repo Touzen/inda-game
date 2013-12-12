@@ -42,7 +42,7 @@ public class Room
         
         if (exits.get(direction) == null) {
             exits.put(direction, neighbor);
-            neighbor.setExit(direction.getOpposite(), this);
+            neighbor.connect(direction.getOpposite(), this);
         }
     }
 

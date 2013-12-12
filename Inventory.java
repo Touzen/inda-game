@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * A class to hold a characters inventory.
  *
@@ -17,6 +19,7 @@ public class Inventory {
     public boolean addItem(Item item) {
         if (items.size() < size) {
             items.add(item);
+            return true;
         } else {
             return false;
         }
@@ -37,6 +40,15 @@ public class Inventory {
     
     public ArrayList<Item> getItems() {
         return items;
+    }
+
+    public int getWeight() {
+        int total = 0;
+        for (Item item: items) {
+            total += item.getWeight();
+        }
+
+        return total;
     }
 
 }

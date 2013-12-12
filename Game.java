@@ -131,7 +131,7 @@ public class Game
                 break;
 
             case INVENTORY:
-                player.listItems();
+                System.out.println(player.listItems());
                 break;
 
             case SEARCH:

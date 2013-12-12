@@ -219,7 +219,7 @@ public class Game
         Item item;
         while (it.hasNext()) {
             item = it.next();
-            if (item.getName() == command.getSecondWord()) {
+            if (item.getName().equals(command.getSecondWord())) {
                 success = player.pickUp(item);
                 it.remove();
                 break;
@@ -243,9 +243,9 @@ public class Game
         Item item;
         while (it.hasNext()) {
             item = it.next();
-            if (item.getName() == command.getSecondWord()) {
-                player.dropItem(item);
+            if (item.getName().equals(command.getSecondWord())) {
                 it.remove();
+                player.getRoom().addItem(item);
                 success = true;
                 break;
             }

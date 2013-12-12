@@ -15,6 +15,7 @@ public class Player {
     public Player(Room room) {
         currentRoom = room;
         inventory = new Inventory();
+        maxWeight = 100; // This should maybe be passed as a parameter?
     }
 
     /**

@@ -120,6 +120,10 @@ public class Game
                 goRoom(command);
                 break;
 
+            case PICKUP:
+                pickupItem(command);
+                break;
+
             case QUIT:
                 wantToQuit = quit(command);
                 break;
@@ -184,6 +188,27 @@ public class Game
         }
         else {
             return true;  // signal that we want to quit
+        }
+    }
+
+    /**
+     * Make the player pickup an item. Print whether this succeeded or not.
+    */
+    private void pickupItem(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Pickup what?");
+            return;
+        }
+
+        Iterator<Item> it = items.iterator();
+        Item item;
+        while (it.hasNext()) {
+            item = it.next();
+            if (item.getName() == command.getSecondWord()) {
+                success = player.pickUp(item);
+                it.remove();
+                break;
+            }
         }
     }
 

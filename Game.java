@@ -129,6 +129,10 @@ public class Game
                 pickupItem(command);
                 break;
 
+            case INVENTORY:
+                player.listItems();
+                break;
+
             case QUIT:
                 wantToQuit = quit(command);
                 break;

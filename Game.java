@@ -13,8 +13,8 @@ import java.util.HashMap;
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2011.08.10
+ * @author  Michael Kölling, David J. Barnes and Thomas Vakili
+ * @version 2012.12.12
  */
 
 public class Game 
@@ -28,7 +28,7 @@ public class Game
      */
     public Game() 
     {
-        HashMap<String, Room> rooms = new HashMap<String, Room>();
+        rooms = new HashMap<String, Room>();
         createRooms();
 
         parser = new Parser();
@@ -154,11 +154,19 @@ public class Game
             System.out.println("Go where?");
             return;
         }
-
-        Direction direction = Direction.valueOf(command.getSecondWord());
+        
+        Direction direction = null;
+        try {
+            direction = Direction.valueOf(command.getSecondWord().toUpperCase());
+        } catch(IllegalArgumentException e) {
+            System.out.println("Invalid direction!");
+            return;
+        }
 
         boolean success = player.move(direction);
-        if (!success) {
+        if (success) {
+            System.out.println(player.look());
+        } else {
             System.out.println("There is no door!");
         }
     }

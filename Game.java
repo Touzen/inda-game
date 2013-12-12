@@ -265,6 +265,7 @@ public class Game
 
         if (items.size() <= 0) {
             System.out.println("There are no items in this rooms.");
+            return;
         }
  
         String string = "The following items where found:";

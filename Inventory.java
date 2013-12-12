@@ -10,6 +10,11 @@ public class Inventory {
     private ArrayList<Item> items;
     private int size;
 
+    public Inventory() {
+        items = new ArrayList<Item>();
+        size = 10;  // This should be passed as a parameter??
+    }
+
     /**
      * Adds an item to the inventory.
      *

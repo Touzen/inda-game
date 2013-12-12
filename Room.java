@@ -17,6 +17,7 @@ public class Room
 {
     private String description;
     private HashMap<Direction, Room> exits;       
+    private ArrayList<Item> items;
 
     /**
      * Create a room described "description". Initially, it has
@@ -24,10 +25,15 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description) 
+    public Room(String description, Item ... items) 
     {
         this.description = description;
         exits = new HashMap<Direction, Room>();
+        
+        ArrayList<Item> this.items = new ArrayList<Item>();
+        for (Item item: items) {
+            this.items.add(item);
+        }
     }
 
     /**
@@ -90,6 +96,15 @@ public class Room
     public Room getExit(Direction direction) 
     {
         return exits.get(direction);
+    }
+
+    /**
+     * Add an item to the room.
+     *
+     * @param item the item to add
+    */
+    public void addItem(Item item) {
+        this.items.add(item);
     }
 }
 

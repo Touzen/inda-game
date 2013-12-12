@@ -73,6 +73,10 @@ public class Player {
      * @return a string presenting the items in the inventory
     */
     public String listItems() {
+        if (inventory.numberOfItems() <= 0) {
+            return "Your inventory is empty.";
+        }
+
         String string = "Inventory:";
         for (Item item: inventory.getItems()) {
             string += " " + item.getName();

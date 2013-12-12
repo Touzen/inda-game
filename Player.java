@@ -12,10 +12,22 @@ public class Player {
     /**
      * Moves the player to a new room.
      *
-     * @param newRoom room to move to
+     * @param direction what direction to move in
+     * @return whether or not the move succeeded
     */
-    public void move(Room newRoom) {
-        currentRoom = newRoom;
+    public Player(Room room) {
+        currentRoom = room;
+    }
+
+    public boolean move(Direction direction) {
+        Room newRoom = currentRoom.getExit(direction);
+
+        if(newRoom != null) {
+            currentRoom = newRoom;
+            return true;
+        }
+
+        return false;
     }
 
     /**

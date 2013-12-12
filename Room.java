@@ -5,21 +5,18 @@ import java.util.Iterator;
 /**
  * Class Room - a room in an adventure game.
  *
- * This class is part of the "World of Zuul" application. 
- * "World of Zuul" is a very simple, text based adventure game.  
- *
  * A "Room" represents one location in the scenery of the game.  It is 
  * connected to other rooms via exits.  For each existing exit, the room 
  * stores a reference to the neighboring room.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2011.08.10
+ * @author  Michael Kölling, David J. Barnes and Thomas Vakili
+ * @version 2013.12.12
  */
 
 public class Room 
 {
     private String description;
-    private HashMap<String, Room> exits;        // stores exits of this room.
+    private HashMap<Direction, Room> exits;       
 
     /**
      * Create a room described "description". Initially, it has
@@ -30,17 +27,23 @@ public class Room
     public Room(String description) 
     {
         this.description = description;
-        exits = new HashMap<String, Room>();
+        exits = new HashMap<Direction, Room>();
     }
 
     /**
-     * Define an exit from this room.
+     * Connects the room and it's neighbor.
      * @param direction The direction of the exit.
      * @param neighbor  The room to which the exit leads.
      */
-    public void setExit(String direction, Room neighbor) 
-    {
-        exits.put(direction, neighbor);
+    public void connect(Direction direction, Room neighbor) {
+        // An exit should only be set once, and to one neighbor only.
+        assert(exits.get(direction) == null || exits.get(direction) == neighbor):
+            "Neighbors can't be redefined!";
+        
+        if (exits.get(direction) == null) {
+            exits.put(direction, neighbor);
+            neighbor.setExit(direction.getOpposite(), this);
+        }
     }
 
     /**
@@ -71,8 +74,8 @@ public class Room
     private String getExitString()
     {
         String returnString = "Exits:";
-        Set<String> keys = exits.keySet();
-        for(String exit : keys) {
+        Set<Direction> keys = exits.keySet();
+        for(Direction exit : keys) {
             returnString += " " + exit;
         }
         return returnString;
@@ -84,7 +87,7 @@ public class Room
      * @param direction The exit's direction.
      * @return The room in the given direction.
      */
-    public Room getExit(String direction) 
+    public Room getExit(Direction direction) 
     {
         return exits.get(direction);
     }

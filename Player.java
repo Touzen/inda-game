@@ -67,6 +67,21 @@ public class Player {
         return currentRoom.getLongDescription();
     }
 
+    /**
+     * List the inventory.
+     *
+     * @return a string presenting the items in the inventory
+    */
+    public String listItems() {
+        String string = "Inventory:";
+        for (Item item: inventory.getItems()) {
+            string += " " + item.getName()
+        }
+        string += ".";
+
+        return string;
+    }
+
     public String getName() {
         return name;
     }

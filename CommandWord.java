@@ -16,6 +16,7 @@ public enum CommandWord
     DROP("drop"),
     INVENTORY("inventory"),
     SEARCH("search"),
+    TELEPORT("teleport"),
     UNKNOWN("?");
     
     // The command string.

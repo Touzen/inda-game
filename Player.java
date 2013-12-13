@@ -89,6 +89,17 @@ public class Player {
         return string;
     }
 
+    public boolean teleport() {
+        boolean success = false;
+        if (currentRoom instanceof Teleporter) {
+            Teleporter teleporter = (Teleporter) currentRoom;
+            currentRoom = teleporter.getDestination();
+            success = true;
+        }
+
+        return success;
+    }
+
     public String getName() {
         return name;
     }

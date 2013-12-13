@@ -22,4 +22,8 @@ public class NPC {
     public String getPhrase() {
         return phrase;
     }
+
+    public Room getRoom() {
+        return currentRoom;
+    }
 }

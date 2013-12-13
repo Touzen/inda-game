@@ -67,17 +67,7 @@ public class Player {
      *         and that let's any NPCs state their mind.
     */
     public String look() {
-        String string = "";
-        string += currentRoom.getLongDescription();
-
-        ArrayList<NPC> npcs = currentRoom.getNPCs();
-        if (npcs.size() > 0) {
-            for (NPC npc : npcs) {
-                string += "\n" + npc.getName() + " says: " + npc.getPhrase();
-            }
-        }
-
-        return string;
+        return currentRoom.getLongDescription();
     }
 
     /**

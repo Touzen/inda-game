@@ -19,7 +19,6 @@ public class Room
     private String description;
     private HashMap<Direction, Room> exits;       
     private ArrayList<Item> items;
-    private ArrayList<NPC> npcs;
 
     /**
      * Create a room described "description". Initially, it has
@@ -120,10 +119,6 @@ public class Room
 
     public ArrayList<Item> getItems() {
         return items;
-    }
-
-    public ArrayList<NPC> getNPCs() {
-        return npcs;
     }
 }
 

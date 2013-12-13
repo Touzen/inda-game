@@ -24,14 +24,18 @@ public class Game
     private Parser parser;
     private HashMap<String, Room> rooms;
     private Player player;
-        
+    private ArrayList<NPC> npcs;
+
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+        npcs = new ArrayList<NPC>();
         rooms = new HashMap<String, Room>();
         createRooms();
+        
+        createNPCs();
 
         parser = new Parser();
         player = new Player(rooms.get("outside"));
@@ -67,6 +71,13 @@ public class Game
         rooms.put("pub", pub);
         rooms.put("lab", lab);
         rooms.put("office", office);
+    }
+    
+    /**
+     * Creates a bunch of NPCs
+    */
+    private void createNPCs() {
+        npcs.add(new NPC("Sup brah?", "Esteban", rooms.get("lab")));
     }
 
     /**
@@ -186,8 +197,22 @@ public class Game
         boolean success = player.move(direction);
         if (success) {
             System.out.println(player.look());
+            NPCSpeak();
         } else {
             System.out.println("There is no door!");
+        }
+    }
+    
+    /**
+     * Let the NPCs speak if they're in the same room as the player.
+    */
+    private void NPCSpeak() {
+        if (npcs.size() > 0) {
+            for (NPC npc : npcs) {
+                if (npc.getRoom() == player.getRoom()) {
+                    System.out.println(npc.getName() + " says: " + npc.getPhrase());
+                }
+            }
         }
     }
 

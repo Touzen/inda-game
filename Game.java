@@ -225,7 +225,7 @@ public class Game
     }
 
     /**
-     * Move NPCs to new rooms.
+     * Move NPCs to new rooms. Print "Thud." if they move in an invalid direction.
     */
     private void moveNPCs() {
         for (NPC npc: npcs) {

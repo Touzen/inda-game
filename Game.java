@@ -223,13 +223,11 @@ public class Game
     }
 
     /**
-     * Move NPCs to new rooms. Print "Thud." if they move in an invalid direction.
+     * Move NPCs to new rooms.
     */
     private void moveNPCs() {
         for (NPC npc: npcs) {
-            if(npc.move(Direction.getRandomDirection()) == false) {
-                System.out.println("Thud.");
-            }
+            npc.move(Direction.getRandomDirection());
         }
     }
 

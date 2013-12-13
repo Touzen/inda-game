@@ -96,6 +96,7 @@ public class Game
         while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
+            moveNPCs();
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
@@ -220,6 +221,15 @@ public class Game
                     System.out.println(npc.getName() + " says: " + npc.getPhrase());
                 }
             }
+        }
+    }
+
+    /**
+     * Move NPCs to new rooms.
+    */
+    private void moveNPCs() {
+        for (NPC npc: npcs) {
+            npc.move(Direction.getRandomDirection());
         }
     }
 

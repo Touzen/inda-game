@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * An enum to handle directions.
  *
@@ -35,7 +37,18 @@ public enum Direction {
         return longDirection;
     }
 
+    /**
+     * Return the opposite direction.
+    */
     public Direction getOpposite() {
         return opposite;
+    }
+    
+    /**
+     * Get a random direction.
+    */
+    public static Direction getRandomDirection() {
+        Random random = new Random();
+        return values()[random.nextInt(values().length)];
     }
 }

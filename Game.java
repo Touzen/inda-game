@@ -229,7 +229,9 @@ public class Game
     */
     private void moveNPCs() {
         for (NPC npc: npcs) {
-            npc.move(Direction.getRandomDirection());
+            if(npc.move(Direction.getRandomDirection()) == false) {
+                System.out.println("Thud.");
+            }
         }
     }
 

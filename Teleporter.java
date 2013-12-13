@@ -13,7 +13,7 @@ public class Teleporter extends Room {
     private Random rand;
 
     public Teleporter(ArrayList<Room> rooms) {
-        super("This is a teleporter. Wonder where it leads...");
+        super("at a teleporter. Wonder where it leads...");
         rand = new Random();
         this.rooms = rooms;
         randomizeDestination();

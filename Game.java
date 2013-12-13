@@ -46,31 +46,26 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
-      
         Item fish = new Item(10, "fish"); // Most important item
 
         // create the rooms
-        outside = new Room("outside the main entrance of the university", fish);
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
-        
+        rooms.put("outside", new Room("outside the main entrance of the university", fish));
+        rooms.put("theater", new Room("in a lecture theater"));
+        rooms.put("pub", new Room("in the campus pub"));
+        rooms.put("lab", new Room("in a computing lab"));
+        rooms.put("office", new Room("in the computing admin office"));
+
         // initialise room exits
-        outside.connect(Direction.EAST, theater);
-        outside.connect(Direction.SOUTH, lab);
-        outside.connect(Direction.WEST, pub);
+        rooms.get("outside").connect(Direction.EAST, rooms.get("theater"));
+        rooms.get("outside").connect(Direction.SOUTH, rooms.get("lab"));
+        rooms.get("outside").connect(Direction.WEST, rooms.get("pub"));
 
-        lab.connect(Direction.EAST, office);
+        rooms.get("lab").connect(Direction.EAST, rooms.get("office"));
 
-        office.connect(Direction.WEST, lab);
-
-        rooms.put("outside", outside);
-        rooms.put("theater", theater);
-        rooms.put("pub", pub);
-        rooms.put("lab", lab);
-        rooms.put("office", office);
+        // create the teleporter
+        Teleporter teleporter = new Teleporter(new ArrayList(this.rooms.values()));
+        rooms.get("lab").connect(Direction.WEST, teleporter);
+        rooms.put("teleporter", teleporter);
     }
     
     /**

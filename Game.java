@@ -334,6 +334,7 @@ public class Game
     private void teleport() {
         if (player.teleport()) {
             System.out.println("WUUUUUURR!");
+            System.out.println(player.look());
         } else {
             System.out.println("Dammit man, you can't teleport unless you're in the teleporter.");
         }

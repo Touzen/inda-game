@@ -289,7 +289,7 @@ public class Game
         }
 
         if (toRemove != null) {
-            player.drop(toRemove);
+            player.dropItem(toRemove);
         } else {
             System.out.println("Silly you... You can't drop the " + itemName
                                + " if you don't have it!");

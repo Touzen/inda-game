@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * A class to hold a characters inventory.
@@ -34,7 +35,7 @@ public class Inventory implements Iterable<Item> {
     public String toString() {
         String string = "";
         if (items.size() > 0) {
-            for (Item item: inventory) {
+            for (Item item: items) {
                 string += item.getName() + " ";
             }
             // Skip the last space

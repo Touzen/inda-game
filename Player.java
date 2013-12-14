@@ -7,33 +7,14 @@ import java.util.ArrayList;
  * @author Thomas Vakili
  * @version 2013.12.12
 */
-public class Player {
-    private String name;
-    private Room currentRoom;
+public class Player extends Character {
     private int maxWeight;
     private Inventory inventory;
     
     public Player(Room room) {
-        currentRoom = room;
+        super(room);
         inventory = new Inventory();
         maxWeight = 100; // This should maybe be passed as a parameter?
-    }
-
-    /**
-     * Moves the player to a new room.
-     *
-     * @param direction what direction to move in
-     * @return whether or not the move succeeded
-    */
-    public boolean move(Direction direction) {
-        Room newRoom = currentRoom.getExit(direction);
-
-        if(newRoom != null) {
-            currentRoom = newRoom;
-            return true;
-        }
-
-        return false;
     }
 
     /**
@@ -100,14 +81,6 @@ public class Player {
         return success;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public Room getRoom() {
-        return currentRoom;
-    }
-    
     public Inventory getInventory() {
         return inventory;
     }

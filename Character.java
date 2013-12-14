@@ -4,18 +4,19 @@
  * Used to subclass Player and NPC.
  *
  * @author Thomas Vakili
- * @version 2013.12.12
+ * @version 2013.12.14
 */
 public abstract class Character {
     private String name;
     private Room currentRoom;
     
-    public Character(Room room) {
+    public Character(String name, Room room) {
+        this.name = name;
         currentRoom = room;
     }
 
     /**
-     * Moves the player to a new room.
+     * Moves the character to a new room.
      *
      * @param direction what direction to move in
      * @return whether or not the move succeeded
@@ -24,7 +25,7 @@ public abstract class Character {
         Room newRoom = currentRoom.getExit(direction);
 
         if(newRoom != null) {
-            currentRoom = newRoom;
+            setRoom(newRoom);
             return true;
         }
 
@@ -37,5 +38,9 @@ public abstract class Character {
 
     public Room getRoom() {
         return currentRoom;
+    }
+
+    protected void setRoom(Room room) {
+        currentRoom = room;
     }
 }

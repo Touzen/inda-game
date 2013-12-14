@@ -5,14 +5,14 @@ import java.util.ArrayList;
  * A class to represent the player.
  *
  * @author Thomas Vakili
- * @version 2013.12.12
+ * @version 2013.12.14
 */
 public class Player extends Character {
     private int maxWeight;
     private Inventory inventory;
     
     public Player(Room room) {
-        super(room);
+        super("Placeholder", room); // A name should be passed
         inventory = new Inventory();
         maxWeight = 100; // This should maybe be passed as a parameter?
     }
@@ -38,7 +38,7 @@ public class Player extends Character {
     */
     public void dropItem(Item item) {
         inventory.removeItem(item);
-        currentRoom.addItem(item);
+        getRoom().addItem(item);
     }
 
     /**
@@ -48,7 +48,7 @@ public class Player extends Character {
      *         and that let's any NPCs state their mind.
     */
     public String look() {
-        return currentRoom.getLongDescription();
+        return getRoom().getLongDescription();
     }
 
     /**
@@ -72,9 +72,9 @@ public class Player extends Character {
 
     public boolean teleport() {
         boolean success = false;
-        if (currentRoom instanceof Teleporter) {
-            Teleporter teleporter = (Teleporter) currentRoom;
-            currentRoom = teleporter.getDestination();
+        if (getRoom() instanceof Teleporter) {
+            Teleporter teleporter = (Teleporter) getRoom();
+            setRoom(teleporter.getDestination());
             success = true;
         }
 

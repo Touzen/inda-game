@@ -158,6 +158,10 @@ public class Game
                 teleport();
                 break;
 
+            case LOOK:
+                System.out.println(player.look());
+                break;
+
             case QUIT:
                 wantToQuit = quit(command);
                 break;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * A class to hold a characters inventory.
  *
  * @author Thomas Vakili
- * @version 2013.12.10
+ * @version 2013.12.14
 */
 public class Inventory {
     private ArrayList<Item> items;
@@ -14,6 +14,26 @@ public class Inventory {
         items = new ArrayList<Item>();
         size = 10;  // This should be passed as a parameter??
     }
+
+    /**
+     * List the inventory.
+     *
+     * @return a string listing all the items
+    */
+    @Override
+    public String toString() {
+        String string = "";
+        if (items.size() > 0) {
+            for (Item item: inventory) {
+                string += item.getName() + " ";
+            }
+            // Skip the last space
+            string = string.substring(0, string.length()-2);
+        }
+
+        return string;
+    }
+
 
     /**
      * Adds an item to the inventory.

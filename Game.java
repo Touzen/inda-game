@@ -16,7 +16,7 @@ import java.util.Iterator;
  *  executes the commands that the parser returns.
  * 
  * @author  Michael Kölling, David J. Barnes and Thomas Vakili
- * @version 2012.12.12
+ * @version 2012.12.14
  */
 
 public class Game 
@@ -147,7 +147,7 @@ public class Game
                 break;
 
             case INVENTORY:
-                System.out.println(player.listItems());
+                listInventory();
                 break;
 
             case SEARCH:
@@ -296,6 +296,18 @@ public class Game
         if (!success) {
             System.out.println("Silly you... You can't drop the " + command.getSecondWord()
                                + " if you don't have it!");
+        }
+    }
+
+    /**
+     * Lists the items in the players inventory.
+    */
+    private void listInventory() {
+        if (player.getInventory().numberOfItems() == 0) {
+            System.out.println("Your inventory is empty.");
+        } else {
+            System.out.println("Inventory: " + 
+                               player.getInventory() + ".");
         }
     }
 

@@ -51,25 +51,6 @@ public class Player extends Character {
         return getRoom().getLongDescription();
     }
 
-    /**
-     * List the inventory.
-     *
-     * @return a string presenting the items in the inventory
-    */
-    public String listItems() {
-        if (inventory.numberOfItems() <= 0) {
-            return "Your inventory is empty.";
-        }
-
-        String string = "Inventory:";
-        for (Item item: inventory.getItems()) {
-            string += " " + item.getName();
-        }
-        string += ".";
-
-        return string;
-    }
-
     public boolean teleport() {
         boolean success = false;
         if (getRoom() instanceof Teleporter) {

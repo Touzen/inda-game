@@ -153,6 +153,7 @@ public class Game
             case SEARCH:
                 listRoomItems();
                 break;
+
             case TELEPORT:
                 teleport();
                 break;

@@ -279,22 +279,19 @@ public class Game
             return;
         }
 
-        boolean success = false;
-        Inventory inventory = player.getInventory();
-        Iterator<Item> it = inventory.getItems().iterator();
-        Item item;
-        while (it.hasNext()) {
-            item = it.next();
-            if (item.getName().equals(command.getSecondWord())) {
-                it.remove();
-                player.getRoom().addItem(item);
-                success = true;
+        String itemName = command.getSecondWord();
+        Item toRemove = null;
+        for (Item item : player.getInventory()) {
+            if (item.getName().equals(itemName)) {
+                toRemove = item;
                 break;
             }
         }
 
-        if (!success) {
-            System.out.println("Silly you... You can't drop the " + command.getSecondWord()
+        if (toRemove != null) {
+            player.drop(toRemove);
+        } else {
+            System.out.println("Silly you... You can't drop the " + itemName
                                + " if you don't have it!");
         }
     }

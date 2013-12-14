@@ -6,13 +6,23 @@ import java.util.ArrayList;
  * @author Thomas Vakili
  * @version 2013.12.14
 */
-public class Inventory {
+public class Inventory implements Iterable<Item> {
     private ArrayList<Item> items;
     private int size;
 
     public Inventory() {
         items = new ArrayList<Item>();
         size = 10;  // This should be passed as a parameter??
+    }
+
+    /**
+     * Method to make it possible to iterate over
+     * the inventory.
+     *
+     * @return iterator for the list of items
+    */
+    public Iterator<Item> iterator() {
+        return items.iterator();
     }
 
     /**

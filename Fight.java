@@ -26,15 +26,13 @@ public class Fight {
         int round;
 
         for (round = 1; winner == null; round++) {
-            int firstIndex = rand.nextInt(N_COMBANTANTS);
+            printRoundInfo(round);
 
             // Randomly select who gets to start
+            int firstIndex = rand.nextInt(N_COMBANTANTS);
             Character first = combatant[firstIndex];
             Character second = combatant[firstIndex == 0 ? 1 : 0]
             
-            System.out.println("\n=============");
-            System.out.println("ROUND " + round);
-            System.out.println("=============");
             round(first, second);
         }
 
@@ -68,5 +66,18 @@ public class Fight {
         if (result.fightOver()) {
             this.winner = result.getWinner();
         }
+    }
+
+    /**
+     * Prints the round number and the combatants HPs
+    */
+    private void printRoundInfo(int round) {
+            System.out.println("\n=============");
+            System.out.println("ROUND " + round);
+            System.out.println(combatant[0].getName() + ": "
+                               + combatant[0].getHP() + "HP");
+            System.out.println(combatant[1].getName() + ": "
+                               + combatant[1].getHP() + "HP");
+            System.out.println("=============");
     }
 }

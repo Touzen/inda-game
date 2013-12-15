@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * A class to represent an NPC.
  *
@@ -14,13 +16,23 @@ public class NPC extends Character {
 
     /**
      * Choose an action to perform in a fight.
+     * Right now the AI is pretty stupid.
      *
      * @param enemy the enemy the NPC faces
      * @return the action chosen
     */
     @Override
     public Action getAction(Character enemy) {
-        // IMPLEMENT PLS
+        Action.ActionVal action;
+
+        int random = (new Random()).nextInt(101) - getHP();
+        if (random > 70) {
+            action = Action.ActionVal.BLOCK;
+        } else {
+            action = Action.ActionVal.ATTACK;
+        }
+
+        return Action(action, this, enemy);
     }
 
     public String getPhrase() {

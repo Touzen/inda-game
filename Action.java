@@ -49,14 +49,45 @@ public class Action {
     }
 
     private Result attack() {
-        //IMPLEMENT PLS
+        String representation;
+        int damage = actor.attack(target);
+
+        return buildResult("attacks " target.getName() + ", dealing " +
+                           damage + " hitpoints of damage");
     }
 
     private Result block() {
-        //IMPLEMENT PLS
+        actor.block();
+        
+        return buildResult("blocks");
     }
 
     private Result surrender() {
-        //IMPLEMENT PLS
+        return buildResult("surrenders");
+    }
+
+    private Result buildResult(String repr) {
+        repr = actor.getName() + " " + repr + "."
+
+        Character winner = null;
+        Character loser = null;
+        winner = checkForWinner();
+
+        if (winner != null) {
+            repr += " " + winner.getName() + " wins!";
+            loser = winner == target ? actor : target;
+        }
+
+        return Result(repr, winner, loser);
+    }
+
+    private Character checkForWinner() {
+        if (this.action == ActionVal.SURRENDER || actor.getHP() <= 0) {
+            return target;
+        } else if (target.getHP() <= 0) {
+            return actor;
+        } else {
+            return null;
+        }
     }
 }

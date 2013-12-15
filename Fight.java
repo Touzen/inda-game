@@ -61,8 +61,6 @@ public class Fight {
      * Execute the action chosen by the character.
     */
     private void executeAction(Character combatant, Action action) {
-        System.out.println(combatant.getName() + " chooses to " +
-                           action + "!");
         Result result = action.execute();
         
         System.out.println(result);

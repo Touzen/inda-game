@@ -62,6 +62,17 @@ public class Player extends Character {
         return success;
     }
 
+    /**
+     * Prompts the player for an action in a fight.
+     *
+     * @param enemy the enemy the player faces
+     * @action the action chosen by the player
+    */
+    @Override
+    public Action getAction(Character enemy) {
+        // IMPLEMENT PLS
+    }
+
     public Inventory getInventory() {
         return inventory;
     }

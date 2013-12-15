@@ -32,6 +32,14 @@ public abstract class Character {
         return false;
     }
 
+    /**
+     * This method is used in fights to get an action.
+     *
+     * @param enemy the enemy the Character is fighting
+     * @return the action the Character chooses
+    */
+    public abstract Action getAction(Character enemy) { }
+
     public String getName() {
         return name;
     }

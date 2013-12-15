@@ -43,7 +43,7 @@ public abstract class Character {
      * @param enemy the enemy the Character is fighting
      * @return the action the Character chooses
     */
-    public abstract Action getAction(Character enemy) { }
+    public abstract Action getAction(Character enemy);
 
     /**
      * Deal damage to a target.
@@ -56,7 +56,7 @@ public abstract class Character {
     */
     public int attack(Character target) {
         blocking = false; // Is this necessary? Unsure.
-        damageDealt = target.takeDamage(10);
+        int damageDealt = target.takeDamage(10);
         
         return damageDealt;
     }

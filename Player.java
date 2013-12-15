@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * A class to represent the player.
@@ -75,7 +76,7 @@ public class Player extends Character {
 
         // Print available commands
         System.out.print("Available commands:");
-        for (String command : Action.ActionVal.values()) {
+        for (Action.ActionVal command : Action.ActionVal.values()) {
             System.out.print(" " + command);
         }
 
@@ -91,7 +92,7 @@ public class Player extends Character {
             }
         }
 
-        return Action(action, this, enemy);
+        return new Action(action, this, enemy);
     }
 
     public Inventory getInventory() {

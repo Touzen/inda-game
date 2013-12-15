@@ -32,7 +32,7 @@ public class NPC extends Character {
             action = Action.ActionVal.ATTACK;
         }
 
-        return Action(action, this, enemy);
+        return new Action(action, this, enemy);
     }
 
     public String getPhrase() {

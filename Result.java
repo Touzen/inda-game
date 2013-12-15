@@ -9,7 +9,7 @@ public class Result {
     Character winner;
     Character loser;
 
-    public Result(String representation, winner, loser) {
+    public Result(String representation, Character winner, Character loser) {
         this.representation = representation;
         this.winner = winner;
         this.loser = loser;

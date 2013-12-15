@@ -6,9 +6,9 @@
 */
 public class Action {
     public static enum ActionVal {
-        ATTACK("attack", "a"),
-        BLOCK("block", "b"),
-        SURRENDER("surrender", "s");
+        ATTACK("attack"),
+        BLOCK("block"),
+        SURRENDER("surrender");
         
         private String actionString;
 
@@ -23,7 +23,7 @@ public class Action {
     }
     
     private ActionVal action;
-    private Character actor
+    private Character actor;
     private Character target;
 
     public Action(ActionVal action, Character actor, Character target) {
@@ -36,23 +36,25 @@ public class Action {
         switch(action) {
             case ATTACK:
                 return attack();
-                break;
 
             case BLOCK:
                 return block();
-                break;
 
             case SURRENDER:
                 return surrender();
-                break;
         }
+
+        assert 1 == 2:
+            "@Action.execute(): This should never be reached."; 
+
+        return null;
     }
 
     private Result attack() {
         String representation;
         int damage = actor.attack(target);
 
-        return buildResult("attacks " target.getName() + ", dealing " +
+        return buildResult("attacks " + target.getName() + ", dealing " +
                            damage + " hitpoints of damage");
     }
 
@@ -67,7 +69,7 @@ public class Action {
     }
 
     private Result buildResult(String repr) {
-        repr = actor.getName() + " " + repr + "."
+        repr = actor.getName() + " " + repr + ".";
 
         Character winner = null;
         Character loser = null;
@@ -78,7 +80,7 @@ public class Action {
             loser = winner == target ? actor : target;
         }
 
-        return Result(repr, winner, loser);
+        return new Result(repr, winner, loser);
     }
 
     private Character checkForWinner() {

@@ -39,7 +39,7 @@ public class Inventory implements Iterable<Item> {
                 string += item.getName() + " ";
             }
             // Skip the last space
-            string = string.substring(0, string.length()-2);
+            string = string.substring(0, string.length()-1);
         }
 
         return string;

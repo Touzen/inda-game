@@ -162,6 +162,10 @@ public class Game
                 System.out.println(player.look());
                 break;
 
+            case FIGHT:
+                fight(command);
+                break;
+
             case QUIT:
                 wantToQuit = quit(command);
                 break;
@@ -224,6 +228,35 @@ public class Game
                     System.out.println(npc.getName() + " says: " + npc.getPhrase());
                 }
             }
+        }
+    }
+
+    /** 
+     * Start a fight with an NPC.
+     * 
+     * @param command a command in the form "fight [NPC name]"
+    */
+    private void fight(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Fight who?");
+        }
+
+        String nameInput = command.getSecondWord();
+        NPC target = null;
+        for (NPC npc : npcs) {
+            String npcName = npc.getName().split(" ")[0];
+            if (npcName.toUpperCase().equals(nameInput.toUpperCase())
+                && npc.getRoom() == player.getRoom()) {
+                target = npc;
+                break;
+            }
+        }
+
+        if (target != null) {
+            Fight fight = new Fight(player, target);
+            fight.start();
+        } else {
+            System.out.println("There's nobody named " + nameInput + " here.");
         }
     }
 

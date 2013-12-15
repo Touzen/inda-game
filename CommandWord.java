@@ -18,6 +18,7 @@ public enum CommandWord
     SEARCH("search"),
     TELEPORT("teleport"),
     LOOK("look"),
+    FIGHT("fight"),
     UNKNOWN("?");
     
     // The command string.

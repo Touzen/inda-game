@@ -9,13 +9,13 @@ import java.util.Random;
 public class Fight {
     private static final int N_COMBATANTS = 2;
 
-    private Character[N_COMBANTANTS] combatant;
+    private Character[] combatant;
     private Character winner;
 
     private Random rand;
 
     public Fight(Character combatant1, Character combatant2) {
-        combatant = {combatant1, combatant2};
+        combatant = new Character[]{combatant1, combatant2};
         rand = new Random();
     }
 
@@ -29,9 +29,9 @@ public class Fight {
             printRoundInfo(round);
 
             // Randomly select who gets to start
-            int firstIndex = rand.nextInt(N_COMBANTANTS);
+            int firstIndex = rand.nextInt(N_COMBATANTS);
             Character first = combatant[firstIndex];
-            Character second = combatant[firstIndex == 0 ? 1 : 0]
+            Character second = combatant[firstIndex == 0 ? 1 : 0];
             
             round(first, second);
         }
@@ -45,7 +45,7 @@ public class Fight {
     /**
      * Run a round.
     */
-    private void round(first, second) {
+    private void round(Character first, Character second) {
         Action firstAction = first.getAction(second);
         executeAction(first, firstAction);
 

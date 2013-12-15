@@ -66,11 +66,32 @@ public class Player extends Character {
      * Prompts the player for an action in a fight.
      *
      * @param enemy the enemy the player faces
-     * @action the action chosen by the player
+     * @return the action chosen by the player
     */
     @Override
     public Action getAction(Character enemy) {
-        // IMPLEMENT PLS
+        Action.ActionVal action = null;
+        Scanner input = new Scanner(System.in);
+
+        // Print available commands
+        System.out.print("Available commands:");
+        for (String command : Action.ActionVal.values()) {
+            System.out.print(" " + command);
+        }
+
+        while (action == null) {
+            System.out.print("\nEnter action: ");
+
+            // Get first word entered
+            try {
+                String command = input.nextLine().split(" ")[0];
+                action = Action.ActionVal.valueOf(command.toUpperCase());
+            } catch(Exception e) {
+                System.out.println("Invalid action!");
+            }
+        }
+
+        return Action(action, this, enemy);
     }
 
     public Inventory getInventory() {

@@ -39,6 +39,9 @@ public class Fight {
         }
 
         System.out.println(winner.getName() + " wins!");
+
+        combatant[0].battleOver();
+        combatant[1].battleOver();
     }
 
     /**

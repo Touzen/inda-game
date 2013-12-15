@@ -278,6 +278,9 @@ public class Game
         }
     }
 
+    /**
+     * Drop a user specified item, if it's in the player's inventory.
+    */
     private void dropItem(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Drop what?");

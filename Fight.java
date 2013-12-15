@@ -62,7 +62,7 @@ public class Fight {
                            action + "!");
         Result result = action.execute();
         
-        System.out.println(result.text());
+        System.out.println(result);
 
         if (result.fightOver()) {
             this.winner = result.getWinner();

@@ -166,6 +166,10 @@ public class Game
                 fight(command);
                 break;
 
+            case SPEAK:
+                npcSpeak();
+                break;
+
             case QUIT:
                 wantToQuit = quit(command);
                 break;
@@ -285,6 +289,15 @@ public class Game
     private void moveNPCs() {
         for (NPC npc: npcs) {
             npc.move(Direction.getRandomDirection());
+        }
+    }
+
+    /**
+     * Let all NPCs in the player's room speak their mind.
+    */
+    private void npcSpeak() {
+        for (NPC npc : npcsInRoom(player.getRoom())) {
+            System.out.println(npc.getName() + ": " + npc.getPhrase());
         }
     }
 

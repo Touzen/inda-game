@@ -89,6 +89,7 @@ public class Game
                 
         boolean finished = false;
         while (! finished) {
+            listNPCs();
             Command command = parser.getCommand();
             finished = processCommand(command);
             moveNPCs();
@@ -111,7 +112,6 @@ public class Game
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(player.look());
-        NPCSpeak();
     }
 
     /**
@@ -212,23 +212,42 @@ public class Game
         boolean success = player.move(direction);
         if (success) {
             System.out.println(player.look());
-            NPCSpeak();
         } else {
             System.out.println("There is no door!");
         }
     }
     
     /**
-     * Let the NPCs speak if they're in the same room as the player.
+     * List the NPCs in the player's room.
     */
-    private void NPCSpeak() {
-        if (npcs.size() > 0) {
-            for (NPC npc : npcs) {
-                if (npc.getRoom() == player.getRoom()) {
-                    System.out.println(npc.getName() + " says: " + npc.getPhrase());
-                }
+    private void listNPCs() {
+        ArrayList<NPC> inRoom = npcsInRoom(player.getRoom());
+        if (inRoom.size() > 0) {
+            System.out.print("NPCs in the room:");
+            for (NPC npc : npcsInRoom(player.getRoom())) {
+                System.out.print(" " + npc.getName());
+            }
+            System.out.println();
+        } else {
+            System.out.println("No NPCs here...");
+        }
+    }
+
+    /**
+     * Returns the NPCs that are in a room.
+     
+     * @param room the room to check
+     * @return a list of NPCs in the room
+    */
+    private ArrayList<NPC> npcsInRoom(Room room) {
+        ArrayList<NPC> inRoom = new ArrayList<NPC>();
+        for (NPC npc : npcs) {
+            if (npc.getRoom() == room) {
+                inRoom.add(npc);
             }
         }
+
+        return inRoom;
     }
 
     /** 

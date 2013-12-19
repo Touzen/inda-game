@@ -47,7 +47,7 @@ public class Room
         assert(exits.get(direction) == null || exits.get(direction) == neighbor):
             "Neighbors can't be redefined!";
         
-        if (exits.get(direction) == null) {
+        if (exits.get(direction) == null && neighbor != null) {
             exits.put(direction, neighbor);
             neighbor.connect(direction.getOpposite(), this);
         }

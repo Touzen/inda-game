@@ -38,7 +38,7 @@ public class Game
         createNPCs();
 
         parser = new Parser();
-        player = new Player(rooms.get("outside"));
+        player = new Player(rooms.get("cell"));
     }
 
     /**
@@ -77,19 +77,19 @@ public class Game
         rooms.put("corridor5,1", new Room("in a long, long corridor"));
 
         rooms.put("win_room", new Room("outside. The wind is blowing. " +
-                                       "It is raining. You are free");
+                                       "It is raining. You are free"));
 
         // initialise room exits
         rooms.get("cell").setExit(Direction.EAST, rooms.get("corridor1,0"));
 
-        for (int x = 0; i <= 5; i++) {
-            for (int y = 0; i <= 5) {
+        for (int x = 0; x <= 5; x++) {
+            for (int y = 0; y <= 5; y++) {
                 Room room = rooms.get("corridor" + x + "," + y);
                 
-                Room roomSouth = rooms.get("corridor" + x + "," + (y + 1);
-                Room roomNorth = rooms.get("corridor" + x + "," + (y - 1);
+                Room roomSouth = rooms.get("corridor" + x + "," + (y + 1));
+                Room roomNorth = rooms.get("corridor" + x + "," + (y - 1));
                 Room roomEast = rooms.get("corridor" + (x + 1) + "," + y); 
-                Room roomWest = rooms.get("corridor" + (x - 1) + "," + y; 
+                Room roomWest = rooms.get("corridor" + (x - 1) + "," + y); 
 
                 if (room != null) {
                     room.setExit(Direction.SOUTH, roomSouth);
@@ -100,7 +100,7 @@ public class Game
             }
         }
                     
-        rooms.get("corridor5,1").setExit(rooms.get("win_room"));
+        rooms.get("corridor5,1").setExit(Direction.EAST, rooms.get("win_room"));
 
         // create the teleporter
         Teleporter teleporter = new Teleporter(new ArrayList(this.rooms.values()));
@@ -112,9 +112,9 @@ public class Game
      * Creates a bunch of NPCs
     */
     private void createNPCs() {
-        npcs.add(new NPC("Sup brah?", "Esteban", rooms.get("lab")));
+        npcs.add(new NPC("Sup brah?", "Esteban", rooms.get("corridor0,4")));
         npcs.add(new NPC("<drunk> whp teh fuckryeeeh? duuuud... suuUuUup... </drunk>",
-                         "Bilal the drunkard", rooms.get("theater")));
+                         "Bilal the drunkard", rooms.get("corridor3,3")));
     }
 
     /**

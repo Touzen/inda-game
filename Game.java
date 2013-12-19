@@ -49,22 +49,62 @@ public class Game
         Item fish = new Item(10, "fish"); // Most important item
 
         // create the rooms
-        rooms.put("outside", new Room("outside the main entrance of the university", fish));
-        rooms.put("theater", new Room("in a lecture theater"));
-        rooms.put("pub", new Room("in the campus pub"));
-        rooms.put("lab", new Room("in a computing lab"));
-        rooms.put("office", new Room("in the computing admin office"));
+        rooms.put("cell", new Room("in your prison cell"));
+
+        rooms.put("corridor0,2", new Room("in a long, long corridor"));
+        rooms.put("corridor0,3", new Room("in a long, long corridor"));
+        rooms.put("corridor0,4", new Room("in a long, long corridor"));
+                                           
+        rooms.put("corridor1,0", new Room("in a long, long corridor"));
+        rooms.put("corridor1,1", new Room("in a long, long corridor"));
+        rooms.put("corridor1,2", new Room("in a long, long corridor"));
+        rooms.put("corridor1,4", new Room("in a long, long corridor"));
+        rooms.put("corridor1,5", new Room("in a long, long corridor"));
+        
+        rooms.put("corridor2,0", new Room("in a long, long corridor"));
+        rooms.put("corridor2,2", new Room("in a long, long corridor"));
+        rooms.put("corridor2,3", new Room("in a long, long corridor"));
+        rooms.put("corridor2,4", new Room("in a long, long corridor"));
+        
+        rooms.put("corridor3,0", new Room("in a long, long corridor"));
+        rooms.put("corridor3,3", new Room("in a long, long corridor"));
+        
+        rooms.put("corridor4,0", new Room("in a long, long corridor"));
+        rooms.put("corridor4,1", new Room("in a long, long corridor"));
+        rooms.put("corridor4,2", new Room("in a long, long corridor"));
+        rooms.put("corridor4,3", new Room("in a long, long corridor"));
+
+        rooms.put("corridor5,1", new Room("in a long, long corridor"));
+
+        rooms.put("win_room", new Room("outside. The wind is blowing. " +
+                                       "It is raining. You are free");
 
         // initialise room exits
-        rooms.get("outside").connect(Direction.EAST, rooms.get("theater"));
-        rooms.get("outside").connect(Direction.SOUTH, rooms.get("lab"));
-        rooms.get("outside").connect(Direction.WEST, rooms.get("pub"));
+        rooms.get("cell").setExit(Direction.EAST, rooms.get("corridor1,0"));
 
-        rooms.get("lab").connect(Direction.EAST, rooms.get("office"));
+        for (int x = 0; i <= 5; i++) {
+            for (int y = 0; i <= 5) {
+                Room room = rooms.get("corridor" + x + "," + y);
+                
+                Room roomSouth = rooms.get("corridor" + x + "," + (y + 1);
+                Room roomNorth = rooms.get("corridor" + x + "," + (y - 1);
+                Room roomEast = rooms.get("corridor" + (x + 1) + "," + y); 
+                Room roomWest = rooms.get("corridor" + (x - 1) + "," + y; 
+
+                if (room != null) {
+                    room.setExit(Direction.SOUTH, roomSouth);
+                    room.setExit(Direction.NORTH, roomNorth);
+                    room.setExit(Direction.EAST, roomEast);
+                    room.setExit(Direction.WEST, roomWest);
+                }
+            }
+        }
+                    
+        rooms.get("corridor5,1").setExit(rooms.get("win_room"));
 
         // create the teleporter
         Teleporter teleporter = new Teleporter(new ArrayList(this.rooms.values()));
-        rooms.get("lab").connect(Direction.WEST, teleporter);
+        rooms.get("corridor1,5").connect(Direction.SOUTH, teleporter);
         rooms.put("teleporter", teleporter);
     }
     

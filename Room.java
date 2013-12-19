@@ -54,6 +54,17 @@ public class Room
     }
 
     /**
+     * Create one way connection between to rooms.
+     * @param direction The direction of the exit.
+     * @param target The destination of the exit.
+    */
+    public void setExit(Direction direction, Room target) {
+        if (target != null) {
+            exits.put(direction, target);
+        }
+    }
+
+    /**
      * @return The short description of the room
      * (the one that was defined in the constructor).
      */

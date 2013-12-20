@@ -397,10 +397,10 @@ public class Game
             Command command = parser.getCommand();
             word = command.getCommandWord();
 
-            if (word != CommandWord.FIGHT || word != CommandWord.HIDE) {
-                System.out.println("Invalid command. Either hide or fight!");
-            } else {
+            if (word == CommandWord.FIGHT || word == CommandWord.HIDE) {
                 validCommand = true;
+            } else {
+                System.out.println("Invalid command. Either hide or fight!");
             }
         }
 

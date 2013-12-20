@@ -27,6 +27,7 @@ public class Game
     private Player player;
     private ArrayList<NPC> npcs;
     private boolean continuePlaying;
+    private int turnNumber;
 
     /**
      * Create the game and initialise its internal map.
@@ -43,6 +44,7 @@ public class Game
         player = new Player(rooms.get("cell"));
 
         continuePlaying = true;
+        turnNumber = 0;
     }
 
     /**
@@ -143,6 +145,7 @@ public class Game
         // execute them until the game is over.
                 
         while (! gameEnded()) {
+            turnNumber++;
             listNPCs();
             Command command = parser.getCommand();
             processCommand(command);
@@ -158,7 +161,23 @@ public class Game
     */
     private boolean gameEnded() {
         return !continuePlaying || !player.isAlive()
-               || player.getRoom() == rooms.get("win_room");
+               || player.getRoom() == rooms.get("win_room")
+               || turnLimitExceeded();
+    }
+
+    /**
+     * Check if the maximum number of turns has been exceeded.
+    */
+    private boolean turnLimitExceeded() {
+        if (turnNumber > 25) {
+            System.out.println("Suddenly, the lights go back on. " +
+                               "The last thing you hear before going " + 
+                               "unconcious is the thump as a baton strikes " +
+                               "your head.");
+            return true;
+        }
+
+        return false;
     }
 
     /**

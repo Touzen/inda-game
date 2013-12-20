@@ -167,14 +167,24 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to KASDG!");
-        System.out.println("KASDG is a game as meaningless as its name. It is like a mirror, forcing"
-                           + " the player to contemplate the pointlessness of existence.");
-        System.out.println("Just like in real life, the notion of progress holds no meaning. "
-                           + "Feel free to explore. Fun fun fun!");
-        System.out.println("(If all else fails, call it art lol)");
+        System.out.println(" _______  _______  _______  _______  _______  _______ \n" +
+                           "(  ____ \\(  ____ \\(  ____ \\(  ___  )(  ____ )(  ____ \\\n" +
+                           "| (    \\/| (    \\/| (    \\/| (   ) || (    )|| (    \\/\n" +
+                           "| (__    | (_____ | |      | (___) || (____)|| (__    \n" + 
+                           "|  __)   (_____  )| |      |  ___  ||  _____)|  __)   \n" +
+                           "| (            ) || |      | (   ) || (      | (      \n" +
+                           "| (____/\\/\\____) || (____/\\| )   ( || )      | (____/\\ \n" +
+                           "(_______/\\_______)(_______/|/     \\||/       (_______/");
+
+        System.out.println("Escape is a game in which you are to escape a prison." +
+                           " Avoid the guards at all cost, or fight them if you must.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
-        System.out.println();
+        System.out.println("OK! Let's begin...\n");
+
+        System.out.println("The power is out. Finally. This may very well be your" +
+                           " only change to be free! Better hurry and escape" + 
+                           " before the lights are turned back on..." +
+                           " You don't have much time...");
         System.out.println(player.look());
     }
 

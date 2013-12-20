@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Random;
 
 /**
  *  This class is the main class of the "World of Zuul" application. 
@@ -141,13 +142,12 @@ public class Game
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
                 
-        boolean finished = false;
         while (! gameEnded()) {
             moveNPCs();
             npcSpeak();
             listNPCs();
             Command command = parser.getCommand();
-            finished = processCommand(command);
+            processCommand(command);
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
@@ -183,10 +183,8 @@ public class Game
      * @param command The command to be processed.
      * @return true If the command ends the game, false otherwise.
      */
-    private boolean processCommand(Command command) 
+    private void processCommand(Command command) 
     {
-        boolean wantToQuit = false;
-
         CommandWord commandWord = command.getCommandWord();
 
         switch (commandWord) {
@@ -228,6 +226,10 @@ public class Game
 
             case FIGHT:
                 fight(command);
+                break;
+            
+            case HIDE:
+                System.out.println("Hide from what?");
                 break;
 
             case QUIT:
@@ -281,7 +283,7 @@ public class Game
         }
 
         ArrayList<NPC> inRoom = npcsInRoom(player.getRoom());
-        if (inRoom.size > 0) {
+        if (inRoom.size() > 0) {
             hideOrFight(inRoom);
         }
     }
@@ -376,33 +378,33 @@ public class Game
         int randomVal = (new Random()).nextInt(100);
 
         System.out.print(inRoom.get(0).getName());
-        if (inRoom.size > 2) {
-            for (NPC guard : inRoom.subList(1, inRoom.size() - 2)) {
+        if (inRoom.size() > 2) {
+            for (NPC guard : inRoom.subList(1, inRoom.size() - 1)) {
                 System.out.print(", " + guard.getName());
              }
         }
-        if (inRoom.size > 1) {
-            System.out.print(" and " + guard.getName());
+        if (inRoom.size() > 1) {
+            System.out.print(" and " + inRoom.get(inRoom.size() - 1).getName());
             System.out.print(" are ");
         } else {
             System.out.print(" is ");
         }
 
-        System.out.println(" in the room. Do you hide or attack?");
-        CommandWord word;
+        System.out.println(" in the room. Do you hide or fight?");
+        CommandWord word = null;
         boolean validCommand = false;
         while (!validCommand) {
             Command command = parser.getCommand();
-            CommandWord word = command.getCommandWord();
+            word = command.getCommandWord();
 
-            if (word != CommandWord.ATTACK || word != CommandWord.HIDE) {
-                System.out.println("Invalid command. Either hide or attack!");
+            if (word != CommandWord.FIGHT || word != CommandWord.HIDE) {
+                System.out.println("Invalid command. Either hide or fight!");
             } else {
                 validCommand = true;
             }
         }
 
-        if (word == CommandWord.ATTACK) {
+        if (word == CommandWord.FIGHT) {
             System.out.print("You attempt to sneak and kill... ");
             if (randomVal < 60/(inRoom.size())) {    // more guards -> harder
                 System.out.println("But you fail.");
@@ -429,8 +431,8 @@ public class Game
     private void getAttacked(ArrayList<NPC> attackers) {
         for (NPC attacker : attackers) {
             System.out.println("You are attacked by " +
-                               guard.getName() ".");
-            Fight fight = new Fight(player, guard);
+                               attacker.getName() + ".");
+            Fight fight = new Fight(player, attacker);
             fight.start();
         }
     }
@@ -440,7 +442,7 @@ public class Game
      * whether we really quit the game.
      * @return true, if this command quits the game, false otherwise.
      */
-    private boolean quit(Command command) 
+    private void quit(Command command) 
     {
         if(command.hasSecondWord()) {
             System.out.println("Quit what?");

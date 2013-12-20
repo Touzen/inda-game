@@ -278,6 +278,9 @@ public class Game
         boolean success = player.move(direction);
         if (success && player.getRoom() != rooms.get("win_room")) {
             System.out.println(player.look());
+        } else if (player.getRoom() == rooms.get("win_room")){
+            System.out.println("You are " +
+                               player.getRoom().getShortDescription() + ".");
         } else {
             System.out.println("There is no door!");
         }
@@ -287,7 +290,7 @@ public class Game
             hideOrFight(inRoom);
         }
     }
-    
+
     /**
      * List the NPCs in the player's room.
     */
@@ -390,7 +393,7 @@ public class Game
             System.out.print(" is ");
         }
 
-        System.out.println(" in the room. Do you hide or fight?");
+        System.out.println("in the room. Do you hide or fight?");
         CommandWord word = null;
         boolean validCommand = false;
         while (!validCommand) {

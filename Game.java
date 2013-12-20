@@ -25,6 +25,7 @@ public class Game
     private HashMap<String, Room> rooms;
     private Player player;
     private ArrayList<NPC> npcs;
+    private boolean continuePlaying;
 
     /**
      * Create the game and initialise its internal map.
@@ -39,6 +40,8 @@ public class Game
 
         parser = new Parser();
         player = new Player(rooms.get("cell"));
+
+        continuePlaying = true;
     }
 
     /**
@@ -139,14 +142,23 @@ public class Game
         // execute them until the game is over.
                 
         boolean finished = false;
-        while (! finished) {
+        while (! gameEnded()) {
+            moveNPCs();
+            npcSpeak();
             listNPCs();
             Command command = parser.getCommand();
             finished = processCommand(command);
-            moveNPCs();
-            npcSpeak();
         }
         System.out.println("Thank you for playing.  Good bye.");
+    }
+
+    /**
+     * Has the game ended?
+     * @return whether or not the game has ended
+    */
+    private boolean gameEnded() {
+        return !continuePlaying || !player.isAlive()
+               || player.getRoom() == rooms.get("win_room");
     }
 
     /**
@@ -219,10 +231,9 @@ public class Game
                 break;
 
             case QUIT:
-                wantToQuit = quit(command);
+                quit(command);
                 break;
         }
-        return wantToQuit;
     }
 
     // implementations of user commands:
@@ -243,7 +254,8 @@ public class Game
 
     /** 
      * Try to go in one direction. If there is an exit, enter the new
-     * room, otherwise print an error message.
+     * room, otherwise print an error message. If NPCs are encountered
+     * attempt to hide or attack them.
      */
     private void goRoom(Command command) 
     {
@@ -266,6 +278,11 @@ public class Game
             System.out.println(player.look());
         } else {
             System.out.println("There is no door!");
+        }
+
+        ArrayList<NPC> inRoom = npcsInRoom(player.getRoom());
+        if (inRoom.size > 0) {
+            hideOrFight(inRoom);
         }
     }
     
@@ -352,6 +369,72 @@ public class Game
         }
     }
 
+    /**
+     * Determine whether the player hides or fights.
+    */
+    private void hideOrFight(ArrayList<NPC> inRoom) {
+        int randomVal = (new Random()).nextInt(100);
+
+        System.out.print(inRoom.get(0).getName());
+        if (inRoom.size > 2) {
+            for (NPC guard : inRoom.subList(1, inRoom.size() - 2)) {
+                System.out.print(", " + guard.getName());
+             }
+        }
+        if (inRoom.size > 1) {
+            System.out.print(" and " + guard.getName());
+            System.out.print(" are ");
+        } else {
+            System.out.print(" is ");
+        }
+
+        System.out.println(" in the room. Do you hide or attack?");
+        CommandWord word;
+        boolean validCommand = false;
+        while (!validCommand) {
+            Command command = parser.getCommand();
+            CommandWord word = command.getCommandWord();
+
+            if (word != CommandWord.ATTACK || word != CommandWord.HIDE) {
+                System.out.println("Invalid command. Either hide or attack!");
+            } else {
+                validCommand = true;
+            }
+        }
+
+        if (word == CommandWord.ATTACK) {
+            System.out.print("You attempt to sneak and kill... ");
+            if (randomVal < 60/(inRoom.size())) {    // more guards -> harder
+                System.out.println("But you fail.");
+                getAttacked(inRoom);
+            } else {
+                System.out.println("And you succeed!");
+                for (NPC npc : inRoom) {
+                    npc.die();
+                }
+            }
+        } else if (word == CommandWord.HIDE) {
+            if (randomVal < 70/(inRoom.size())) {
+                System.out.println("You manage to hide in the shadows.");
+            } else {
+                System.out.println("You fail to hide and have been detected!");
+                getAttacked(inRoom);
+            }
+        }
+    }
+
+    /**
+     * Get attacked by NPCs.
+    */
+    private void getAttacked(ArrayList<NPC> attackers) {
+        for (NPC attacker : attackers) {
+            System.out.println("You are attacked by " +
+                               guard.getName() ".");
+            Fight fight = new Fight(player, guard);
+            fight.start();
+        }
+    }
+
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
@@ -361,10 +444,9 @@ public class Game
     {
         if(command.hasSecondWord()) {
             System.out.println("Quit what?");
-            return false;
         }
         else {
-            return true;  // signal that we want to quit
+            continuePlaying = false;  // signal that we want to quit
         }
     }
 

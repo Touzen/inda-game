@@ -9,6 +9,7 @@
 public abstract class Character {
     private String name;
     private Room currentRoom;
+    private boolean alive;
 
     // Fighting variables
     private boolean blocking;
@@ -16,6 +17,7 @@ public abstract class Character {
     
     public Character(String name, Room room) {
         this.name = name;
+        alive = true;
         currentRoom = room;
         hp = 100; // MAGICAL CONSTANT
     }
@@ -44,6 +46,13 @@ public abstract class Character {
      * @return the action the Character chooses
     */
     public abstract Action getAction(Character enemy);
+
+    /**
+     * This method is called when a character dies.
+    */
+    public void die() {
+        alive = false;
+    }
 
     /**
      * Deal damage to a target.
@@ -117,5 +126,9 @@ public abstract class Character {
 
     protected void setRoom(Room room) {
         currentRoom = room;
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 }

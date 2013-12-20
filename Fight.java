@@ -36,8 +36,11 @@ public class Fight {
             round(first, second);
         }
 
-        combatant[0].battleOver();
-        combatant[1].battleOver();
+        winner.battleOver();
+
+        Character loser = (winner == combatant[0] ?
+                           combatant[1] : combatant[0]);
+        loser.die();
     }
 
     /**

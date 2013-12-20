@@ -95,6 +95,15 @@ public class Player extends Character {
         return new Action(action, this, enemy);
     }
 
+    /**
+     * Kills the player, ending so that the game can end.
+    */
+    @Override
+    public void die() {
+        super.die();
+        System.out.println("You are dead.");
+    }
+
     public Inventory getInventory() {
         return inventory;
     }

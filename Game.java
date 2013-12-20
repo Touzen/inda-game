@@ -112,9 +112,20 @@ public class Game
      * Creates a bunch of NPCs
     */
     private void createNPCs() {
-        npcs.add(new NPC("Sup brah?", "Esteban", rooms.get("corridor0,4")));
-        npcs.add(new NPC("<drunk> whp teh fuckryeeeh? duuuud... suuUuUup... </drunk>",
-                         "Bilal the drunkard", rooms.get("corridor3,3")));
+        npcs.add(new NPC("Huh... What's that noise?", "Guard 104", rooms.get("corridor0,4")));
+
+        npcs.add(new NPC("I feel like I'm starting to hear shit. " + 
+                         "Hope they put the lights on again soon...",
+                         "Guard 109", rooms.get("corridor2,4")));
+
+        npcs.add(new NPC("What was that?! I'm getting all jumpy...",
+                         "Guard 112", rooms.get("corridor4,0")));
+
+        npcs.add(new NPC("WHO'S THERE?! ... Jesus, I'm getting all paranoid...",
+                         "Guard 42", rooms.get("corridor5,1")));
+
+        npcs.add(new NPC("... My boss is a fucking jerk... I just wanna go home",
+                         "Guard 93", rooms.get("corridor4,2")));
     }
 
     /**

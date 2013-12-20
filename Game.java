@@ -276,7 +276,7 @@ public class Game
         }
 
         boolean success = player.move(direction);
-        if (success) {
+        if (success && player.getRoom() != rooms.get("win_room")) {
             System.out.println(player.look());
         } else {
             System.out.println("There is no door!");

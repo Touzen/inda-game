@@ -143,11 +143,11 @@ public class Game
         // execute them until the game is over.
                 
         while (! gameEnded()) {
-            moveNPCs();
-            npcSpeak();
             listNPCs();
             Command command = parser.getCommand();
             processCommand(command);
+            moveNPCs();
+            npcSpeak();
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
@@ -313,7 +313,7 @@ public class Game
     private ArrayList<NPC> npcsInRoom(Room room) {
         ArrayList<NPC> inRoom = new ArrayList<NPC>();
         for (NPC npc : npcs) {
-            if (npc.getRoom() == room) {
+            if (npc.getRoom() == room && npc.isAlive()) {
                 inRoom.add(npc);
             }
         }

@@ -8,10 +8,12 @@ import java.util.Random;
 */
 public class NPC extends Character {
     private String phrase;
+    private boolean hasSpoken;
 
     public NPC(String phrase, String name, Room room) {
         super(name, room);
         this.phrase = phrase;
+        this.hasSpoken = false;
     }
 
     /**
@@ -36,6 +38,11 @@ public class NPC extends Character {
     }
 
     public String getPhrase() {
-        return phrase;
+        if (hasSpoken) {
+            return null;
+        } else {
+            hasSpoken = true;
+            return phrase;
+        }
     }
 }

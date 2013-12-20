@@ -144,6 +144,7 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
             moveNPCs();
+            npcSpeak();
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
@@ -215,10 +216,6 @@ public class Game
 
             case FIGHT:
                 fight(command);
-                break;
-
-            case SPEAK:
-                npcSpeak();
                 break;
 
             case QUIT:
@@ -348,7 +345,10 @@ public class Game
     */
     private void npcSpeak() {
         for (NPC npc : npcsInRoom(player.getRoom())) {
-            System.out.println(npc.getName() + ": " + npc.getPhrase());
+            String phrase = npc.getPhrase();
+            if (phrase != null) {
+                System.out.println(npc.getName() + ": " + phrase);
+            }
         }
     }
 
